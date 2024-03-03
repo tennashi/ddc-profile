@@ -34,7 +34,12 @@ endfunction
 
 function! ddc#custom#profile#load(name) abort
   let l:profile = s:profiles[a:name]
-  call ddc#custom#patch_local(a:name, l:profile)
+
+  if a:name ==# "*"
+    call ddc#custom#patch_global(l:profile)
+  endif
+
+  call ddc#custom#patch_filetype(a:name, l:profile)
 endfunction
 
 augroup DDCProfile
